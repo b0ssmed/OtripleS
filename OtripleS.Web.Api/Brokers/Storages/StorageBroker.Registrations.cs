@@ -18,7 +18,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Registration> InsertRegistrationAsync(Registration registration)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             EntityEntry<Registration> registrationEntityEntry = await broker.Registrations.AddAsync(entity: registration);
             await broker.SaveChangesAsync();
 
@@ -29,7 +29,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Registration> SelectRegistrationByIdAsync(Guid registrationId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             return await broker.Registrations.FindAsync(registrationId);
@@ -37,7 +37,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Registration> UpdateRegistrationAsync(Registration registration)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             EntityEntry<Registration> registrationEntityEntry = broker.Registrations.Update(entity: registration);
             await broker.SaveChangesAsync();
 
@@ -46,7 +46,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Registration> DeleteRegistrationAsync(Registration registration)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             EntityEntry<Registration> registrationEntityEntry = broker.Registrations.Remove(entity: registration);
             await broker.SaveChangesAsync();
 

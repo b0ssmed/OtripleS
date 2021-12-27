@@ -18,7 +18,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Assignment> InsertAssignmentAsync(Assignment assignment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             EntityEntry<Assignment> assignmentEntityEntry = await broker.Assignments.AddAsync(entity: assignment);
             await broker.SaveChangesAsync();
 
@@ -29,7 +29,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Assignment> SelectAssignmentByIdAsync(Guid assignmentId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             return await Assignments.FindAsync(assignmentId);
@@ -37,7 +37,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Assignment> UpdateAssignmentAsync(Assignment assignment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             EntityEntry<Assignment> assignmentEntityEntry = broker.Assignments.Update(entity: assignment);
             await broker.SaveChangesAsync();
 
@@ -46,7 +46,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<Assignment> DeleteAssignmentAsync(Assignment assignment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             EntityEntry<Assignment> assignmentEntityEntry = broker.Assignments.Remove(entity: assignment);
             await broker.SaveChangesAsync();
 

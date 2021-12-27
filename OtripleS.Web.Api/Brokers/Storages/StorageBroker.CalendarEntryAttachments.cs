@@ -19,7 +19,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<CalendarEntryAttachment> InsertCalendarEntryAttachmentAsync(
             CalendarEntryAttachment calendarEntryAttachment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<CalendarEntryAttachment> calendarEntryAttachmentEntityEntry =
                 await broker.CalendarEntriesAttachments.AddAsync(entity: calendarEntryAttachment);
@@ -36,7 +36,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
             Guid calendarEntryId,
             Guid attachmentId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             return await broker.CalendarEntriesAttachments.FindAsync(calendarEntryId, attachmentId);
@@ -45,7 +45,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<CalendarEntryAttachment> UpdateCalendarEntryAttachmentAsync(
             CalendarEntryAttachment calendarEntryAttachment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<CalendarEntryAttachment> calendarEntryAttachmentEntityEntry =
                 broker.CalendarEntriesAttachments.Update(entity: calendarEntryAttachment);
@@ -58,7 +58,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<CalendarEntryAttachment> DeleteCalendarEntryAttachmentAsync(
             CalendarEntryAttachment calendarEntryAttachment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<CalendarEntryAttachment> calendarEntryAttachmentEntityEntry =
                 broker.CalendarEntriesAttachments.Remove(entity: calendarEntryAttachment);

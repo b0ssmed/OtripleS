@@ -18,7 +18,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<StudentGuardian> InsertStudentGuardianAsync(StudentGuardian studentGuardian)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<StudentGuardian> studentGuardianEntityEntry =
                 await broker.StudentGuardians.AddAsync(entity: studentGuardian);
@@ -32,7 +32,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<StudentGuardian> SelectStudentGuardianByIdAsync(Guid studentId, Guid guardianId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             return await broker.StudentGuardians.FindAsync(studentId, guardianId);
@@ -40,7 +40,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<StudentGuardian> UpdateStudentGuardianAsync(StudentGuardian studentGuardian)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<StudentGuardian> studentGuardianEntityEntry =
                 broker.StudentGuardians.Update(entity: studentGuardian);
@@ -52,7 +52,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<StudentGuardian> DeleteStudentGuardianAsync(StudentGuardian studentGuardian)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<StudentGuardian> studentGuardianEntityEntry =
                 broker.StudentGuardians.Remove(entity: studentGuardian);

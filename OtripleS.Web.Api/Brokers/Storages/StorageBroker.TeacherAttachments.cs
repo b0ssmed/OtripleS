@@ -19,7 +19,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<TeacherAttachment> InsertTeacherAttachmentAsync(
             TeacherAttachment teacherAttachment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<TeacherAttachment> teacherAttachmentEntityEntry =
                 await broker.TeacherAttachments.AddAsync(entity: teacherAttachment);
@@ -36,7 +36,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
             Guid teacherId,
             Guid attachmentId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             return await broker.TeacherAttachments.FindAsync(teacherId, attachmentId);
@@ -45,7 +45,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<TeacherAttachment> UpdateTeacherAttachmentAsync(
             TeacherAttachment teacherAttachment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<TeacherAttachment> teacherAttachmentEntityEntry =
                 broker.TeacherAttachments.Update(entity: teacherAttachment);
@@ -58,7 +58,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<TeacherAttachment> DeleteTeacherAttachmentAsync(
             TeacherAttachment teacherAttachment)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<TeacherAttachment> teacherAttachmentEntityEntry =
                 broker.TeacherAttachments.Remove(entity: teacherAttachment);

@@ -18,7 +18,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<CalendarEntry> InsertCalendarEntryAsync(CalendarEntry calendarEntry)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<CalendarEntry> calendarEntryEntityEntry =
                 await broker.CalendarEntries.AddAsync(entity: calendarEntry);
@@ -32,7 +32,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<CalendarEntry> SelectCalendarEntryByIdAsync(Guid calendarEntryId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             broker.ChangeTracker.QueryTrackingBehavior =
                 QueryTrackingBehavior.NoTracking;
@@ -42,7 +42,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<CalendarEntry> UpdateCalendarEntryAsync(CalendarEntry calendarEntry)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<CalendarEntry> calendarEntryEntityEntry =
                 broker.CalendarEntries.Update(entity: calendarEntry);
@@ -54,7 +54,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
 
         public async ValueTask<CalendarEntry> DeleteCalendarEntryAsync(CalendarEntry calendarEntry)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<CalendarEntry> calendarEntryEntityEntry =
                 broker.CalendarEntries.Remove(entity: calendarEntry);

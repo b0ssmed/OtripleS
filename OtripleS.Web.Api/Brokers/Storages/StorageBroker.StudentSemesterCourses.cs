@@ -19,7 +19,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<StudentSemesterCourse> InsertStudentSemesterCourseAsync(
             StudentSemesterCourse studentSemesterCourse)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<StudentSemesterCourse> studentSemesterCourseEntityEntry =
                 await broker.StudentSemesterCourses.AddAsync(entity: studentSemesterCourse);
@@ -35,7 +35,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<StudentSemesterCourse> SelectStudentSemesterCourseByIdAsync(
             Guid studentId, Guid semesterCourseId)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
             broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             return await broker.StudentSemesterCourses.FindAsync(studentId, semesterCourseId);
@@ -44,7 +44,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<StudentSemesterCourse> UpdateStudentSemesterCourseAsync(
             StudentSemesterCourse studentSemesterCourse)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<StudentSemesterCourse> studentSemesterCourseEntityEntry =
                 broker.StudentSemesterCourses.Update(entity: studentSemesterCourse);
@@ -57,7 +57,7 @@ namespace OtripleS.Web.Api.Brokers.Storages
         public async ValueTask<StudentSemesterCourse> DeleteStudentSemesterCourseAsync(
             StudentSemesterCourse studentSemesterCourse)
         {
-            using var broker = new StorageBroker(this.configuration);
+            using var broker = CreateBroker(configuration);
 
             EntityEntry<StudentSemesterCourse> studentSemesterCourseEntityEntry =
                 broker.StudentSemesterCourses.Remove(entity: studentSemesterCourse);
